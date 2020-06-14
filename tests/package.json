@@ -1,0 +1,15 @@
+{
+	"name": "postman",
+	"version": "1.0.0",
+	"description": "Project for",
+	"directories": {
+		"test": "tests"
+	},
+	"scripts": {
+		"api-tests-production": "newman run DemoNoelia.postman_collection.json -e OnPremise.postman_environment.json"
+	},
+	"author": "Noelia",
+	"dependencies": {
+		"newman": "^5.1.0"
+	}
+}

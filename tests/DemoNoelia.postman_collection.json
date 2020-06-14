@@ -1,0 +1,207 @@
+{
+	"info": {
+		"_postman_id": "7d3078c1-c5c6-4ce8-abc3-a1735086a5c7",
+		"name": "DemoNoelia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login API OnPremise",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ea16246c-1f50-4624-b294-8d5eb0726806",
+						"exec": [
+							"postman.setGlobalVariable(\"RESPONSE\", data);\r",
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"token\", data.token);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"login\" : \"admin\",\r\n    \"password\" : \"api\",\r\n    \"org\" : \"NTO\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{IP}}/api/security/login",
+					"host": [
+						"{{IP}}"
+					],
+					"path": [
+						"api",
+						"security",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Session",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d579b2f9-a9ea-41de-a122-e6232b80dd19",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization-Token",
+						"value": "{{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n              \"Operation\": \"Create\",\r\n              \"Constructor\": {\r\n  \t\"strParentID\":\"TestVendor2\"\r\n  },\r\n              \"ModelFields\": {\r\n    \"fields\": [\r\n        {\r\n            \"AC_ADDRESS_ID\": \"H1\"\r\n        },\r\n        {\r\n            \"AC_DESCRIPTION\": \"H1 Address New\"\r\n        },\r\n        {\r\n            \"AC_TYPE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ADDRESS\": \"\"\r\n        },\r\n        {\r\n            \"AC_CITY\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ZIP\": \"\"\r\n        },\r\n        {\r\n            \"AC_COUNTRY\": \"\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDADDRESS\": \",\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDTEMPLATE\": \"<ADDRESS>\\r\\n<CITY>, <STPROV> <POSTCODE>\\r\\n<COUNTRY>\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FIRST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_MIDDLE_INITIAL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_LAST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_POSITION\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_PHONE\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_EMAIL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FAX\": \"\"\r\n        },\r\n        {\r\n            \"AC_MEM_NOTES\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATUS\": \"A\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_TITLE\": \"\"\r\n        },\r\n        {\r\n            \"AC_PARN_ID\": \"TestVendor2\"\r\n        },\r\n        {\r\n            \"AC_SAME_AS\": \"0\"\r\n        },\r\n        {\r\n            \"AC_PREFERRED\": \"No\"\r\n        },\r\n        {\r\n            \"AC_IN_USE\": false\r\n        }\r\n    ]\r\n}\r\n            }",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "{{IP}}/api/te/arinvoices/sessions/AR0208008",
+					"host": [
+						"{{IP}}"
+					],
+					"path": [
+						"api",
+						"te",
+						"arinvoices",
+						"sessions",
+						"AR0208008"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Documents",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bc4cf5bc-4374-41cb-a726-51e3b4966d19",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization-Token",
+						"value": "{{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n              \"Operation\": \"Create\",\r\n              \"Constructor\": {\r\n  \t\"strParentID\":\"TestVendor2\"\r\n  },\r\n              \"ModelFields\": {\r\n    \"fields\": [\r\n        {\r\n            \"AC_ADDRESS_ID\": \"H1\"\r\n        },\r\n        {\r\n            \"AC_DESCRIPTION\": \"H1 Address New\"\r\n        },\r\n        {\r\n            \"AC_TYPE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ADDRESS\": \"\"\r\n        },\r\n        {\r\n            \"AC_CITY\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ZIP\": \"\"\r\n        },\r\n        {\r\n            \"AC_COUNTRY\": \"\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDADDRESS\": \",\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDTEMPLATE\": \"<ADDRESS>\\r\\n<CITY>, <STPROV> <POSTCODE>\\r\\n<COUNTRY>\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FIRST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_MIDDLE_INITIAL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_LAST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_POSITION\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_PHONE\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_EMAIL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FAX\": \"\"\r\n        },\r\n        {\r\n            \"AC_MEM_NOTES\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATUS\": \"A\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_TITLE\": \"\"\r\n        },\r\n        {\r\n            \"AC_PARN_ID\": \"TestVendor2\"\r\n        },\r\n        {\r\n            \"AC_SAME_AS\": \"0\"\r\n        },\r\n        {\r\n            \"AC_PREFERRED\": \"No\"\r\n        },\r\n        {\r\n            \"AC_IN_USE\": false\r\n        }\r\n    ]\r\n}\r\n            }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{IP}}/api/te/arinvoices/sessions/AR0208008/documents",
+					"host": [
+						"{{IP}}"
+					],
+					"path": [
+						"api",
+						"te",
+						"arinvoices",
+						"sessions",
+						"AR0208008",
+						"documents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "45499822-072c-4e22-b28b-bf68da38b791",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization-Token",
+						"value": "{{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{IP}}/api/security/logout",
+					"host": [
+						"{{IP}}"
+					],
+					"path": [
+						"api",
+						"security",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
