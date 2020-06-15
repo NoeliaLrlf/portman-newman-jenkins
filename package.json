@@ -5,9 +5,10 @@
 	"directories": {
 		"test": "tests"
 	},
-	"scripts":
+	"scripts": {
 		"api-tests-newRestApiV1": "newman run tests/DemoNewRestApiV1.postman_collection.json -e tests/OnPremise.postman_environment.json",
 		"api-tests-oldRestApi": "newman run tests/DemoOldRestApi.postman_collection.json -e tests/OnPremise.postman_environment.json"
+
 	},
 	"author": "Noelia",
 	"dependencies": {
