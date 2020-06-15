@@ -6,7 +6,7 @@
 		"test": "tests"
 	},
 	"scripts": {
-		"api-tests-production": "newman run DemoNoelia.postman_collection.json -e OnPremise.postman_environment.json"
+		"api-tests-production": "newman run tests/DemoNoelia.postman_collection.json -e tests/OnPremise.postman_environment.json"
 	},
 	"author": "Noelia",
 	"dependencies": {
