@@ -1,0 +1,304 @@
+{
+	"info": {
+		"_postman_id": "5a112f36-52f3-498c-b923-ece18bafb2fc",
+		"name": "DemoNewRestApiV1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login API OnPremise",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0d65bb2b-55d9-44fa-8c0a-7439634b8001",
+						"exec": [
+							"postman.setGlobalVariable(\"RESPONSE\", data);\r",
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"token\", data.token);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"login\" : \"admin\",\r\n    \"password\" : \"api\",\r\n    \"org\" : \"NTO\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{IP}}/api/security/login",
+					"host": [
+						"{{IP}}"
+					],
+					"path": [
+						"api",
+						"security",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Documents",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "04569205-c900-4787-9fec-a8e380248d90",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization-Token",
+						"value": "{{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n              \"Operation\": \"Create\",\r\n              \"Constructor\": {\r\n  \t\"strParentID\":\"TestVendor2\"\r\n  },\r\n              \"ModelFields\": {\r\n    \"fields\": [\r\n        {\r\n            \"AC_ADDRESS_ID\": \"H1\"\r\n        },\r\n        {\r\n            \"AC_DESCRIPTION\": \"H1 Address New\"\r\n        },\r\n        {\r\n            \"AC_TYPE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ADDRESS\": \"\"\r\n        },\r\n        {\r\n            \"AC_CITY\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ZIP\": \"\"\r\n        },\r\n        {\r\n            \"AC_COUNTRY\": \"\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDADDRESS\": \",\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDTEMPLATE\": \"<ADDRESS>\\r\\n<CITY>, <STPROV> <POSTCODE>\\r\\n<COUNTRY>\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FIRST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_MIDDLE_INITIAL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_LAST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_POSITION\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_PHONE\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_EMAIL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FAX\": \"\"\r\n        },\r\n        {\r\n            \"AC_MEM_NOTES\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATUS\": \"A\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_TITLE\": \"\"\r\n        },\r\n        {\r\n            \"AC_PARN_ID\": \"TestVendor2\"\r\n        },\r\n        {\r\n            \"AC_SAME_AS\": \"0\"\r\n        },\r\n        {\r\n            \"AC_PREFERRED\": \"No\"\r\n        },\r\n        {\r\n            \"AC_IN_USE\": false\r\n        }\r\n    ]\r\n}\r\n            }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{IP}}/api/te/arinvoices/sessions/AR0208008/documents",
+					"host": [
+						"{{IP}}"
+					],
+					"path": [
+						"api",
+						"te",
+						"arinvoices",
+						"sessions",
+						"AR0208008",
+						"documents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Session",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8b186169-225d-4ca3-be5c-6e04906e4a83",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "509569cc-3e07-488c-88c2-0a14ed69c790",
+						"exec": [
+							"const sessionID = pm.environment.set(\"sessionID\", _.random(100000, 999999));\r",
+							"pm.globals.set(\"sessionID\", sessionID);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization-Token",
+						"value": "{{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"sessionId\": \"{{sessionID}}\",\r\n        \"status\": \"BP\",\r\n        \"description\": \"Description1\",\r\n        \"date\": \"2019-06-20\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{IP}}/api/v1/transactions/journalvouchers/sessions/",
+					"host": [
+						"{{IP}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"transactions",
+						"journalvouchers",
+						"sessions",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Session",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6c949995-fd85-4040-bd6f-e3316258c069",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization-Token",
+						"value": "{{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{IP}}/api/v1/transactions/journalvouchers/sessions/{{sessionID}}",
+					"host": [
+						"{{IP}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"transactions",
+						"journalvouchers",
+						"sessions",
+						"{{sessionID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cf70258a-27e0-4458-acb7-e55c3e1824f5",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization-Token",
+						"value": "{{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{IP}}/api/security/logout",
+					"host": [
+						"{{IP}}"
+					],
+					"path": [
+						"api",
+						"security",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "d981c0c4-23f2-4bcd-80f2-f63b5069ee35",
+				"type": "text/javascript",
+				"exec": [
+					"pm.environment.set(\"RandomNumber\", _.random(100000, 999999));"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "8667eedf-7791-44c4-bd2c-cc81d253f458",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "5a53dc24-198d-4746-8e0c-16ff79f9ff4f",
+			"key": "RandomNumber",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
