@@ -64,7 +64,7 @@
 						"id": "04569205-c900-4787-9fec-a8e380248d90",
 						"exec": [
 							"pm.test(\"Get Documents\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.have.status(201);\r",
 							"});\r",
 							""
 						],
@@ -351,7 +351,7 @@
 	],
 	"variable": [
 		{
-			"id": "4afa1395-41d7-4f07-bc72-ce6e7800cabe",
+			"id": "696c9db7-4db2-403b-a969-99cc6da591c5",
 			"key": "RandomNumber",
 			"value": "",
 			"type": "string"
