@@ -111,127 +111,6 @@
 			"response": []
 		},
 		{
-			"name": "Create Session",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "8b186169-225d-4ca3-be5c-6e04906e4a83",
-						"exec": [
-							"pm.test(\"Status code is 201\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
-							"});\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "509569cc-3e07-488c-88c2-0a14ed69c790",
-						"exec": [
-							"const sessionID = pm.environment.set(\"sessionID\", _.random(100000, 999999));\r",
-							"pm.globals.set(\"sessionID\", sessionID);"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization-Token",
-						"value": "{{token}}"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n        \"sessionId\": \"{{sessionID}}\",\r\n        \"status\": \"BP\",\r\n        \"description\": \"Description1\",\r\n        \"date\": \"2019-06-20\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{IP}}/api/v1/transactions/journalvouchers/sessions/",
-					"host": [
-						"{{IP}}"
-					],
-					"path": [
-						"api",
-						"v1",
-						"transactions",
-						"journalvouchers",
-						"sessions",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete Session",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "6c949995-fd85-4040-bd6f-e3316258c069",
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Authorization-Token",
-						"value": "{{token}}"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{IP}}/api/v1/transactions/journalvouchers/sessions/{{sessionID}}",
-					"host": [
-						"{{IP}}"
-					],
-					"path": [
-						"api",
-						"v1",
-						"transactions",
-						"journalvouchers",
-						"sessions",
-						"{{sessionID}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Logout",
 			"event": [
 				{
@@ -294,7 +173,7 @@
 	],
 	"variable": [
 		{
-			"id": "5a53dc24-198d-4746-8e0c-16ff79f9ff4f",
+			"id": "d5eaeb7b-33eb-4589-81b4-334126cfe7c1",
 			"key": "RandomNumber",
 			"value": "",
 			"type": "string"
