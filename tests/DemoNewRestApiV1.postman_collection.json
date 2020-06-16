@@ -114,6 +114,181 @@
 			"response": []
 		},
 		{
+			"name": "Get Session",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "487f4364-6589-4ba7-84b6-1fd6c41f349a",
+						"exec": [
+							"pm.test(\"Get Session\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization-Token",
+						"value": "{{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n              \"Operation\": \"Create\",\r\n              \"Constructor\": {\r\n  \t\"strParentID\":\"TestVendor2\"\r\n  },\r\n              \"ModelFields\": {\r\n    \"fields\": [\r\n        {\r\n            \"AC_ADDRESS_ID\": \"H1\"\r\n        },\r\n        {\r\n            \"AC_DESCRIPTION\": \"H1 Address New\"\r\n        },\r\n        {\r\n            \"AC_TYPE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ADDRESS\": \"\"\r\n        },\r\n        {\r\n            \"AC_CITY\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ZIP\": \"\"\r\n        },\r\n        {\r\n            \"AC_COUNTRY\": \"\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDADDRESS\": \",\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDTEMPLATE\": \"<ADDRESS>\\r\\n<CITY>, <STPROV> <POSTCODE>\\r\\n<COUNTRY>\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FIRST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_MIDDLE_INITIAL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_LAST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_POSITION\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_PHONE\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_EMAIL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FAX\": \"\"\r\n        },\r\n        {\r\n            \"AC_MEM_NOTES\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATUS\": \"A\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_TITLE\": \"\"\r\n        },\r\n        {\r\n            \"AC_PARN_ID\": \"TestVendor2\"\r\n        },\r\n        {\r\n            \"AC_SAME_AS\": \"0\"\r\n        },\r\n        {\r\n            \"AC_PREFERRED\": \"No\"\r\n        },\r\n        {\r\n            \"AC_IN_USE\": false\r\n        }\r\n    ]\r\n}\r\n            }",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "{{IP}}/api/te/arinvoices/sessions/AR0208008",
+					"host": [
+						"{{IP}}"
+					],
+					"path": [
+						"api",
+						"te",
+						"arinvoices",
+						"sessions",
+						"AR0208008"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Session",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b6b6cfdc-513f-46e3-91b1-2830ba4759d7",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f61bb5df-d609-4db6-9626-8429184558e0",
+						"exec": [
+							"const sessionID = pm.environment.set(\"sessionID\", _.random(100000, 999999));\r",
+							"pm.globals.set(\"sessionID\", sessionID);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization-Token",
+						"value": "{{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"sessionId\": \"{{sessionID}}\",\r\n        \"status\": \"BP\",\r\n        \"description\": \"Description1\",\r\n        \"date\": \"2019-06-20\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{IP}}/api/v1/transactions/journalvouchers/sessions/",
+					"host": [
+						"{{IP}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"transactions",
+						"journalvouchers",
+						"sessions",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Session",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "87ea8c09-dab9-416f-8372-0cfdcfe86ffe",
+						"exec": [
+							"pm.test(\"Delete Session\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization-Token",
+						"value": "{{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{IP}}/api/v1/transactions/journalvouchers/sessions/{{sessionID}}",
+					"host": [
+						"{{IP}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"transactions",
+						"journalvouchers",
+						"sessions",
+						"{{sessionID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Logout",
 			"event": [
 				{
@@ -176,7 +351,7 @@
 	],
 	"variable": [
 		{
-			"id": "0fa7635c-a345-4ad9-9e20-a30cad1c8d76",
+			"id": "fddb0202-cf5c-4fdf-a61c-64f5a840bf4b",
 			"key": "RandomNumber",
 			"value": "",
 			"type": "string"
