@@ -16,7 +16,7 @@
 							"postman.setGlobalVariable(\"RESPONSE\", data);\r",
 							"var data = JSON.parse(responseBody);\r",
 							"postman.setGlobalVariable(\"token\", data.token);\r",
-							"pm.test(\"Status code is 200\", function () {\r",
+							"pm.test(\"Login API OnPremise\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
@@ -63,7 +63,7 @@
 					"script": {
 						"id": "04569205-c900-4787-9fec-a8e380248d90",
 						"exec": [
-							"pm.test(\"Status code is 201\", function () {\r",
+							"pm.test(\"Get Documents\", function () {\r",
 							"    pm.response.to.have.status(201);\r",
 							"});\r",
 							""
@@ -121,7 +121,7 @@
 					"script": {
 						"id": "cf70258a-27e0-4458-acb7-e55c3e1824f5",
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
+							"pm.test(\"Logout\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
@@ -176,7 +176,7 @@
 	],
 	"variable": [
 		{
-			"id": "e9341cd6-2506-4d6c-9cd0-06b2dccd9edc",
+			"id": "0fa7635c-a345-4ad9-9e20-a30cad1c8d76",
 			"key": "RandomNumber",
 			"value": "",
 			"type": "string"
