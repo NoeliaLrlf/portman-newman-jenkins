@@ -64,7 +64,7 @@
 						"id": "04569205-c900-4787-9fec-a8e380248d90",
 						"exec": [
 							"pm.test(\"Get Documents\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
+							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							""
 						],
@@ -175,7 +175,7 @@
 					"script": {
 						"id": "b6b6cfdc-513f-46e3-91b1-2830ba4759d7",
 						"exec": [
-							"pm.test(\"Status code is 201\", function () {\r",
+							"pm.test(\"Create Session\", function () {\r",
 							"    pm.response.to.have.status(201);\r",
 							"});\r",
 							"\r",
@@ -351,7 +351,7 @@
 	],
 	"variable": [
 		{
-			"id": "fddb0202-cf5c-4fdf-a61c-64f5a840bf4b",
+			"id": "4afa1395-41d7-4f07-bc72-ce6e7800cabe",
 			"key": "RandomNumber",
 			"value": "",
 			"type": "string"
