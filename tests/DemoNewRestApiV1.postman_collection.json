@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "5a112f36-52f3-498c-b923-ece18bafb2fc",
 		"name": "DemoNewRestApiV1",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -41,7 +41,17 @@
 						}
 					}
 				},
-				"url": "{{IP}}/api/security/login"
+				"url": {
+					"raw": "{{IP}}/api/security/login",
+					"host": [
+						"{{IP}}"
+					],
+					"path": [
+						"api",
+						"security",
+						"login"
+					]
+				}
 			},
 			"response": []
 		},
@@ -86,7 +96,20 @@
 						}
 					}
 				},
-				"url": "{{IP}}/api/te/arinvoices/sessions/AR0208008/documents"
+				"url": {
+					"raw": "{{IP}}/api/te/arinvoices/sessions/AR0208008/documents",
+					"host": [
+						"{{IP}}"
+					],
+					"path": [
+						"api",
+						"te",
+						"arinvoices",
+						"sessions",
+						"AR0208008",
+						"documents"
+					]
+				}
 			},
 			"response": []
 		},
@@ -114,7 +137,17 @@
 						"value": "{{token}}"
 					}
 				],
-				"url": "{{IP}}/api/security/logout"
+				"url": {
+					"raw": "{{IP}}/api/security/logout",
+					"host": [
+						"{{IP}}"
+					],
+					"path": [
+						"api",
+						"security",
+						"logout"
+					]
+				}
 			},
 			"response": []
 		}
@@ -143,7 +176,7 @@
 	],
 	"variable": [
 		{
-			"id": "0fb5d638-d15d-41e4-b83b-547f915667e5",
+			"id": "a3bfdc05-16f2-4711-93ee-bc40586f2f30",
 			"key": "RandomNumber",
 			"value": "",
 			"type": "string"
