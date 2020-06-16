@@ -8,10 +8,10 @@
 	"scripts": {
 		"api-tests-newRestApiV1": "newman run tests/DemoNewRestApiV1.postman_collection.json -e tests/OnPremise.postman_environment.json --reporters cli,junit --reporter-junit-export newman.xml",
 		"api-tests-oldRestApi": "newman run tests/DemoOldRestApi.postman_collection.json -e tests/OnPremise.postman_environment.json --reporters cli,junit --reporter-junit-export newman.xml"
-
 	},
 	"author": "Noelia",
 	"dependencies": {
+		"junit": "^1.4.9",
 		"newman": "^5.1.0"
 	}
 }
