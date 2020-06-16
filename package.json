@@ -5,9 +5,6 @@
 	"directories": {
 		"test": "tests"
 	},
-	"scripts": {
-		"api-tests-newRestApiV1": "newman run tests/DemoNewRestApiV1.postman_collection.json -e tests/OnPremise.postman_environment.json --reporters ,junit --reporter-junit-export newman/newman.xml"
-	},
 	"author": "Noelia",
 	"dependencies": {
 		"newman": "^5.1.0"
