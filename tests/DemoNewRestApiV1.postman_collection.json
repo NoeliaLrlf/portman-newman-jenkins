@@ -301,6 +301,117 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "test2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "efcf23a7-0442-4e10-a0fc-fe9ac5476769",
+										"exec": [
+											"pm.test(\"test2\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization-Token",
+										"type": "text",
+										"value": "{{Token}}"
+									}
+								],
+								"url": {
+									"raw": "{{IP}}/api/te/arinvoices/sessions/AR0208008",
+									"host": [
+										"{{IP}}"
+									],
+									"path": [
+										"api",
+										"te",
+										"arinvoices",
+										"sessions",
+										"AR0208008"
+									]
+								},
+								"description": "swqaqsdes"
+							},
+							"response": []
+						},
+						{
+							"name": "test2 Copy",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization-Token",
+										"value": "{{Token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{IP}}/api/te/arinvoices/sessions/AR0208008",
+									"host": [
+										"{{IP}}"
+									],
+									"path": [
+										"api",
+										"te",
+										"arinvoices",
+										"sessions",
+										"AR0208008"
+									]
+								},
+								"description": "swqaqsdes"
+							},
+							"response": []
+						},
+						{
+							"name": "test2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "efcf23a7-0442-4e10-a0fc-fe9ac5476769",
+										"exec": [
+											"pm.test(\"test2\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization-Token",
+										"type": "text",
+										"value": "{{Token}}"
+									}
+								],
+								"url": {
+									"raw": "{{IP}}/api/te/arinvoices/sessions/AR0208008",
+									"host": [
+										"{{IP}}"
+									],
+									"path": [
+										"api",
+										"te",
+										"arinvoices",
+										"sessions",
+										"AR0208008"
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"protocolProfileBehavior": {},
@@ -950,7 +1061,7 @@
 	],
 	"variable": [
 		{
-			"id": "691eec2c-9150-4121-9bb6-0a395f168090",
+			"id": "ac1a2c8a-c986-4bd6-a528-7f8877cb2d77",
 			"key": "RandomNumber",
 			"value": "",
 			"type": "string"
