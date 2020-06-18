@@ -1,9 +1,13 @@
 {
-	"name": "postman",
+	"name": "Rest API Postman",
 	"version": "1.0.0",
-	"description": "Project for",
+	"description": "Project for Test cases rest api",
 	"directories": {
 		"test": "tests"
+	},
+	"scripts": {
+    "api-tests-v1": "newman run newman run tests/DemoNewRestApiV1.postman_collection.json -e tests/OnPremise.postman_environment.json --reporters cli,htmlextra,junit --reporter-junit-export newman/newman.xml --reporter-htmlextra-export newman/newman.html",
+    "api-tests-old": "newman run newman run tests/DemoOldRestApi.postman_collection.json -e tests/OnPremise.postman_environment.json --reporters cli,htmlextra,junit --reporter-junit-export newman/newman.xml --reporter-htmlextra-export newman/newman.html"
 	},
 	"author": "Noelia",
 	"dependencies": {
