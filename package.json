@@ -11,6 +11,8 @@
 	},
 	"author": "Noelia",
 	"dependencies": {
-		"newman": "^5.1.0"
+		"newman": "^5.1.0",
+		"newman-reporter-htmlextra": "1.16.0",
+        "newman-reporter-html": "1.0.5"
 	}
 }
