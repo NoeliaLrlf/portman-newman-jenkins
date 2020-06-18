@@ -6,325 +6,898 @@
 	},
 	"item": [
 		{
-			"name": "Login API OnPremise",
-			"event": [
+			"name": "Login ",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"id": "0d65bb2b-55d9-44fa-8c0a-7439634b8001",
-						"exec": [
-							"postman.setGlobalVariable(\"RESPONSE\", data);\r",
-							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"token\", data.token);\r",
-							"pm.test(\"Login API OnPremise\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});"
+					"name": "Login API OnPremise",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d65bb2b-55d9-44fa-8c0a-7439634b8001",
+								"exec": [
+									"postman.setGlobalVariable(\"RESPONSE\", data);\r",
+									"var data = JSON.parse(responseBody);\r",
+									"postman.setGlobalVariable(\"token\", data.token);\r",
+									"pm.test(\"Login API OnPremise\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
 						],
-						"type": "text/javascript"
-					}
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\" : \"admin\",\r\n    \"password\" : \"api\",\r\n    \"org\" : \"NTO\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{IP}}/api/security/login",
+							"host": [
+								"{{IP}}"
+							],
+							"path": [
+								"api",
+								"security",
+								"login"
+							]
+						}
+					},
+					"response": []
 				}
 			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"login\" : \"admin\",\r\n    \"password\" : \"api\",\r\n    \"org\" : \"NTO\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{IP}}/api/security/login",
-					"host": [
-						"{{IP}}"
-					],
-					"path": [
-						"api",
-						"security",
-						"login"
-					]
-				}
-			},
-			"response": []
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Get Documents",
-			"event": [
+			"name": "Transactions",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"id": "04569205-c900-4787-9fec-a8e380248d90",
-						"exec": [
-							"pm.test(\"Get Documents\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
-							"});\r",
-							""
-						],
-						"type": "text/javascript"
-					}
+					"name": "JV",
+					"item": [
+						{
+							"name": "Get Documents",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "04569205-c900-4787-9fec-a8e380248d90",
+										"exec": [
+											"pm.test(\"Get Documents\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization-Token",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"sessionId\": \"APIJV0001\",\r\n        \"status\": \"BP\",\r\n        \"description\": \"Description1\",\r\n        \"date\": \"2019-06-20\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{IP}}/api/te/arinvoices/sessions/AR0208008/documents",
+									"host": [
+										"{{IP}}"
+									],
+									"path": [
+										"api",
+										"te",
+										"arinvoices",
+										"sessions",
+										"AR0208008",
+										"documents"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Session",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b6b6cfdc-513f-46e3-91b1-2830ba4759d7",
+										"exec": [
+											"pm.test(\"Create Session\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "f61bb5df-d609-4db6-9626-8429184558e0",
+										"exec": [
+											"const sessionID = pm.environment.set(\"sessionID\", _.random(100000, 999999));\r",
+											"pm.globals.set(\"sessionID\", sessionID);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization-Token",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"sessionId\": \"{{sessionID}}\",\r\n        \"status\": \"BP\",\r\n        \"description\": \"Description1\",\r\n        \"date\": \"2019-06-20\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{IP}}/api/v1/transactions/journalvouchers/sessions/",
+									"host": [
+										"{{IP}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"transactions",
+										"journalvouchers",
+										"sessions",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Session",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "487f4364-6589-4ba7-84b6-1fd6c41f349a",
+										"exec": [
+											"pm.test(\"Get Session\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization-Token",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n              \"Operation\": \"Create\",\r\n              \"Constructor\": {\r\n  \t\"strParentID\":\"TestVendor2\"\r\n  },\r\n              \"ModelFields\": {\r\n    \"fields\": [\r\n        {\r\n            \"AC_ADDRESS_ID\": \"H1\"\r\n        },\r\n        {\r\n            \"AC_DESCRIPTION\": \"H1 Address New\"\r\n        },\r\n        {\r\n            \"AC_TYPE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ADDRESS\": \"\"\r\n        },\r\n        {\r\n            \"AC_CITY\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ZIP\": \"\"\r\n        },\r\n        {\r\n            \"AC_COUNTRY\": \"\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDADDRESS\": \",\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDTEMPLATE\": \"<ADDRESS>\\r\\n<CITY>, <STPROV> <POSTCODE>\\r\\n<COUNTRY>\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FIRST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_MIDDLE_INITIAL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_LAST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_POSITION\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_PHONE\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_EMAIL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FAX\": \"\"\r\n        },\r\n        {\r\n            \"AC_MEM_NOTES\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATUS\": \"A\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_TITLE\": \"\"\r\n        },\r\n        {\r\n            \"AC_PARN_ID\": \"TestVendor2\"\r\n        },\r\n        {\r\n            \"AC_SAME_AS\": \"0\"\r\n        },\r\n        {\r\n            \"AC_PREFERRED\": \"No\"\r\n        },\r\n        {\r\n            \"AC_IN_USE\": false\r\n        }\r\n    ]\r\n}\r\n            }",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{IP}}/api/te/arinvoices/sessions/AR0208008",
+									"host": [
+										"{{IP}}"
+									],
+									"path": [
+										"api",
+										"te",
+										"arinvoices",
+										"sessions",
+										"AR0208008"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Session",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "87ea8c09-dab9-416f-8372-0cfdcfe86ffe",
+										"exec": [
+											"pm.test(\"Delete Session\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization-Token",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{IP}}/api/v1/transactions/journalvouchers/sessions/{{sessionID}}",
+									"host": [
+										"{{IP}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"transactions",
+										"journalvouchers",
+										"sessions",
+										"{{sessionID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Budget",
+					"item": [
+						{
+							"name": "Login API OnPremise",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "2878080a-385a-4b97-9209-321ff84a0fa9",
+										"exec": [
+											"postman.setGlobalVariable(\"RESPONSE\", data);\r",
+											"var data = JSON.parse(responseBody);\r",
+											"postman.setGlobalVariable(\"token\", data.token);\r",
+											"pm.test(\"Login API OnPremise\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"login\" : \"admin\",\r\n    \"password\" : \"api\",\r\n    \"org\" : \"NTO\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{IP}}/api/security/login",
+									"host": [
+										"{{IP}}"
+									],
+									"path": [
+										"api",
+										"security",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Documents",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "87659724-bfdb-4ee7-a6af-84947f1ce0c3",
+										"exec": [
+											"pm.test(\"Get Documents\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization-Token",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"sessionId\": \"APIJV0001\",\r\n        \"status\": \"BP\",\r\n        \"description\": \"Description1\",\r\n        \"date\": \"2019-06-20\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{IP}}/api/te/arinvoices/sessions/AR0208008/documents",
+									"host": [
+										"{{IP}}"
+									],
+									"path": [
+										"api",
+										"te",
+										"arinvoices",
+										"sessions",
+										"AR0208008",
+										"documents"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Session",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "3dfb49af-0da2-4eff-9c85-263b2a4cd2db",
+										"exec": [
+											"pm.test(\"Create Session Budget\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "6552e1b5-f3a2-48ab-9b93-97e28e03cb7c",
+										"exec": [
+											"const sessionID = pm.environment.set(\"sessionID\", _.random(100000, 999999));\r",
+											"pm.globals.set(\"sessionID\", sessionID);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization-Token",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"sessionId\": \"{{sessionID}}\",\r\n        \"status\": \"BP\",\r\n        \"description\": \"Description1\",\r\n        \"date\": \"2019-06-20\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{IP}}/api/v1/transactions/journalvouchers/sessions/",
+									"host": [
+										"{{IP}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"transactions",
+										"journalvouchers",
+										"sessions",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Session",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b5bbb283-451c-4047-8a74-5d2908f44654",
+										"exec": [
+											"pm.test(\"Get Session Budget\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization-Token",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n              \"Operation\": \"Create\",\r\n              \"Constructor\": {\r\n  \t\"strParentID\":\"TestVendor2\"\r\n  },\r\n              \"ModelFields\": {\r\n    \"fields\": [\r\n        {\r\n            \"AC_ADDRESS_ID\": \"H1\"\r\n        },\r\n        {\r\n            \"AC_DESCRIPTION\": \"H1 Address New\"\r\n        },\r\n        {\r\n            \"AC_TYPE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ADDRESS\": \"\"\r\n        },\r\n        {\r\n            \"AC_CITY\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ZIP\": \"\"\r\n        },\r\n        {\r\n            \"AC_COUNTRY\": \"\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDADDRESS\": \",\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDTEMPLATE\": \"<ADDRESS>\\r\\n<CITY>, <STPROV> <POSTCODE>\\r\\n<COUNTRY>\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FIRST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_MIDDLE_INITIAL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_LAST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_POSITION\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_PHONE\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_EMAIL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FAX\": \"\"\r\n        },\r\n        {\r\n            \"AC_MEM_NOTES\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATUS\": \"A\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_TITLE\": \"\"\r\n        },\r\n        {\r\n            \"AC_PARN_ID\": \"TestVendor2\"\r\n        },\r\n        {\r\n            \"AC_SAME_AS\": \"0\"\r\n        },\r\n        {\r\n            \"AC_PREFERRED\": \"No\"\r\n        },\r\n        {\r\n            \"AC_IN_USE\": false\r\n        }\r\n    ]\r\n}\r\n            }",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{IP}}/api/te/arinvoices/sessions/AR0208008",
+									"host": [
+										"{{IP}}"
+									],
+									"path": [
+										"api",
+										"te",
+										"arinvoices",
+										"sessions",
+										"AR0208008"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Session",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c7c3cf23-cae3-47a4-87b4-660b6a7c5d5e",
+										"exec": [
+											"pm.test(\"Delete Session Budget\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization-Token",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{IP}}/api/v1/transactions/journalvouchers/sessions/{{sessionID}}",
+									"host": [
+										"{{IP}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"transactions",
+										"journalvouchers",
+										"sessions",
+										"{{sessionID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Receipts",
+					"item": [
+						{
+							"name": "Get Documents Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "51e9651c-2bf4-413a-b840-c979a92a7f54",
+										"exec": [
+											"pm.test(\"Get Documents\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization-Token",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"sessionId\": \"APIJV0001\",\r\n        \"status\": \"BP\",\r\n        \"description\": \"Description1\",\r\n        \"date\": \"2019-06-20\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{IP}}/api/te/arinvoices/sessions/AR0208008/documents",
+									"host": [
+										"{{IP}}"
+									],
+									"path": [
+										"api",
+										"te",
+										"arinvoices",
+										"sessions",
+										"AR0208008",
+										"documents"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Session",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "af28f574-1457-41a9-9a07-b3100d53880c",
+										"exec": [
+											"pm.test(\"Get Session\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization-Token",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n              \"Operation\": \"Create\",\r\n              \"Constructor\": {\r\n  \t\"strParentID\":\"TestVendor2\"\r\n  },\r\n              \"ModelFields\": {\r\n    \"fields\": [\r\n        {\r\n            \"AC_ADDRESS_ID\": \"H1\"\r\n        },\r\n        {\r\n            \"AC_DESCRIPTION\": \"H1 Address New\"\r\n        },\r\n        {\r\n            \"AC_TYPE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ADDRESS\": \"\"\r\n        },\r\n        {\r\n            \"AC_CITY\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ZIP\": \"\"\r\n        },\r\n        {\r\n            \"AC_COUNTRY\": \"\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDADDRESS\": \",\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDTEMPLATE\": \"<ADDRESS>\\r\\n<CITY>, <STPROV> <POSTCODE>\\r\\n<COUNTRY>\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FIRST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_MIDDLE_INITIAL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_LAST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_POSITION\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_PHONE\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_EMAIL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FAX\": \"\"\r\n        },\r\n        {\r\n            \"AC_MEM_NOTES\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATUS\": \"A\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_TITLE\": \"\"\r\n        },\r\n        {\r\n            \"AC_PARN_ID\": \"TestVendor2\"\r\n        },\r\n        {\r\n            \"AC_SAME_AS\": \"0\"\r\n        },\r\n        {\r\n            \"AC_PREFERRED\": \"No\"\r\n        },\r\n        {\r\n            \"AC_IN_USE\": false\r\n        }\r\n    ]\r\n}\r\n            }",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{IP}}/api/te/arinvoices/sessions/AR0208008",
+									"host": [
+										"{{IP}}"
+									],
+									"path": [
+										"api",
+										"te",
+										"arinvoices",
+										"sessions",
+										"AR0208008"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
 				}
 			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization-Token",
-						"value": "{{token}}"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n        \"sessionId\": \"APIJV0001\",\r\n        \"status\": \"BP\",\r\n        \"description\": \"Description1\",\r\n        \"date\": \"2019-06-20\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{IP}}/api/te/arinvoices/sessions/AR0208008/documents",
-					"host": [
-						"{{IP}}"
-					],
-					"path": [
-						"api",
-						"te",
-						"arinvoices",
-						"sessions",
-						"AR0208008",
-						"documents"
-					]
-				}
-			},
-			"response": []
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Get Session",
-			"event": [
+			"name": "Maintain",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"id": "487f4364-6589-4ba7-84b6-1fd6c41f349a",
-						"exec": [
-							"pm.test(\"Get Session\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization-Token",
-						"value": "{{token}}"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n              \"Operation\": \"Create\",\r\n              \"Constructor\": {\r\n  \t\"strParentID\":\"TestVendor2\"\r\n  },\r\n              \"ModelFields\": {\r\n    \"fields\": [\r\n        {\r\n            \"AC_ADDRESS_ID\": \"H1\"\r\n        },\r\n        {\r\n            \"AC_DESCRIPTION\": \"H1 Address New\"\r\n        },\r\n        {\r\n            \"AC_TYPE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ADDRESS\": \"\"\r\n        },\r\n        {\r\n            \"AC_CITY\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ZIP\": \"\"\r\n        },\r\n        {\r\n            \"AC_COUNTRY\": \"\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDADDRESS\": \",\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDTEMPLATE\": \"<ADDRESS>\\r\\n<CITY>, <STPROV> <POSTCODE>\\r\\n<COUNTRY>\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FIRST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_MIDDLE_INITIAL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_LAST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_POSITION\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_PHONE\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_EMAIL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FAX\": \"\"\r\n        },\r\n        {\r\n            \"AC_MEM_NOTES\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATUS\": \"A\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_TITLE\": \"\"\r\n        },\r\n        {\r\n            \"AC_PARN_ID\": \"TestVendor2\"\r\n        },\r\n        {\r\n            \"AC_SAME_AS\": \"0\"\r\n        },\r\n        {\r\n            \"AC_PREFERRED\": \"No\"\r\n        },\r\n        {\r\n            \"AC_IN_USE\": false\r\n        }\r\n    ]\r\n}\r\n            }",
-					"options": {
-						"raw": {}
-					}
-				},
-				"url": {
-					"raw": "{{IP}}/api/te/arinvoices/sessions/AR0208008",
-					"host": [
-						"{{IP}}"
-					],
-					"path": [
-						"api",
-						"te",
-						"arinvoices",
-						"sessions",
-						"AR0208008"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create Session",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "b6b6cfdc-513f-46e3-91b1-2830ba4759d7",
-						"exec": [
-							"pm.test(\"Create Session\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
-							"});\r",
-							"\r",
-							""
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "f61bb5df-d609-4db6-9626-8429184558e0",
-						"exec": [
-							"const sessionID = pm.environment.set(\"sessionID\", _.random(100000, 999999));\r",
-							"pm.globals.set(\"sessionID\", sessionID);"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization-Token",
-						"value": "{{token}}"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n        \"sessionId\": \"{{sessionID}}\",\r\n        \"status\": \"BP\",\r\n        \"description\": \"Description1\",\r\n        \"date\": \"2019-06-20\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+					"name": "Vendors",
+					"item": [
+						{
+							"name": "Get Session",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0b78750b-3cc0-4fd2-8a3c-517bab5b1187",
+										"exec": [
+											"pm.test(\"Get Session\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization-Token",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n              \"Operation\": \"Create\",\r\n              \"Constructor\": {\r\n  \t\"strParentID\":\"TestVendor2\"\r\n  },\r\n              \"ModelFields\": {\r\n    \"fields\": [\r\n        {\r\n            \"AC_ADDRESS_ID\": \"H1\"\r\n        },\r\n        {\r\n            \"AC_DESCRIPTION\": \"H1 Address New\"\r\n        },\r\n        {\r\n            \"AC_TYPE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ADDRESS\": \"\"\r\n        },\r\n        {\r\n            \"AC_CITY\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ZIP\": \"\"\r\n        },\r\n        {\r\n            \"AC_COUNTRY\": \"\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDADDRESS\": \",\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDTEMPLATE\": \"<ADDRESS>\\r\\n<CITY>, <STPROV> <POSTCODE>\\r\\n<COUNTRY>\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FIRST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_MIDDLE_INITIAL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_LAST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_POSITION\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_PHONE\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_EMAIL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FAX\": \"\"\r\n        },\r\n        {\r\n            \"AC_MEM_NOTES\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATUS\": \"A\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_TITLE\": \"\"\r\n        },\r\n        {\r\n            \"AC_PARN_ID\": \"TestVendor2\"\r\n        },\r\n        {\r\n            \"AC_SAME_AS\": \"0\"\r\n        },\r\n        {\r\n            \"AC_PREFERRED\": \"No\"\r\n        },\r\n        {\r\n            \"AC_IN_USE\": false\r\n        }\r\n    ]\r\n}\r\n            }",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{IP}}/api/te/arinvoices/sessions/AR0208008",
+									"host": [
+										"{{IP}}"
+									],
+									"path": [
+										"api",
+										"te",
+										"arinvoices",
+										"sessions",
+										"AR0208008"
+									]
+								}
+							},
+							"response": []
 						}
-					}
-				},
-				"url": {
-					"raw": "{{IP}}/api/v1/transactions/journalvouchers/sessions/",
-					"host": [
-						"{{IP}}"
 					],
-					"path": [
-						"api",
-						"v1",
-						"transactions",
-						"journalvouchers",
-						"sessions",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete Session",
-			"event": [
+					"description": "This is vendors suite",
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "string"
+							}
+						]
+					},
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
 				{
-					"listen": "test",
-					"script": {
-						"id": "87ea8c09-dab9-416f-8372-0cfdcfe86ffe",
-						"exec": [
-							"pm.test(\"Delete Session\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
+					"name": "Customers",
+					"item": [
+						{
+							"name": "Get Session",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "fd0e9dce-1790-4aaa-91c4-5888ec66a889",
+										"exec": [
+											"pm.test(\"Get Session\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization-Token",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n              \"Operation\": \"Create\",\r\n              \"Constructor\": {\r\n  \t\"strParentID\":\"TestVendor2\"\r\n  },\r\n              \"ModelFields\": {\r\n    \"fields\": [\r\n        {\r\n            \"AC_ADDRESS_ID\": \"H1\"\r\n        },\r\n        {\r\n            \"AC_DESCRIPTION\": \"H1 Address New\"\r\n        },\r\n        {\r\n            \"AC_TYPE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ADDRESS\": \"\"\r\n        },\r\n        {\r\n            \"AC_CITY\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ZIP\": \"\"\r\n        },\r\n        {\r\n            \"AC_COUNTRY\": \"\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDADDRESS\": \",\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDTEMPLATE\": \"<ADDRESS>\\r\\n<CITY>, <STPROV> <POSTCODE>\\r\\n<COUNTRY>\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FIRST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_MIDDLE_INITIAL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_LAST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_POSITION\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_PHONE\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_EMAIL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FAX\": \"\"\r\n        },\r\n        {\r\n            \"AC_MEM_NOTES\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATUS\": \"A\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_TITLE\": \"\"\r\n        },\r\n        {\r\n            \"AC_PARN_ID\": \"TestVendor2\"\r\n        },\r\n        {\r\n            \"AC_SAME_AS\": \"0\"\r\n        },\r\n        {\r\n            \"AC_PREFERRED\": \"No\"\r\n        },\r\n        {\r\n            \"AC_IN_USE\": false\r\n        }\r\n    ]\r\n}\r\n            }",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{IP}}/api/te/arinvoices/sessions/AR0208008",
+									"host": [
+										"{{IP}}"
+									],
+									"path": [
+										"api",
+										"te",
+										"arinvoices",
+										"sessions",
+										"AR0208008"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
 				}
 			],
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Authorization-Token",
-						"value": "{{token}}"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{IP}}/api/v1/transactions/journalvouchers/sessions/{{sessionID}}",
-					"host": [
-						"{{IP}}"
-					],
-					"path": [
-						"api",
-						"v1",
-						"transactions",
-						"journalvouchers",
-						"sessions",
-						"{{sessionID}}"
-					]
-				}
-			},
-			"response": []
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Logout",
-			"event": [
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"id": "cf70258a-27e0-4458-acb7-e55c3e1824f5",
-						"exec": [
-							"pm.test(\"Logout\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});"
+					"name": "Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cf70258a-27e0-4458-acb7-e55c3e1824f5",
+								"exec": [
+									"pm.test(\"Logout\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization-Token",
+								"value": "{{token}}"
+							}
 						],
-						"type": "text/javascript"
-					}
+						"url": {
+							"raw": "{{IP}}/api/security/logout",
+							"host": [
+								"{{IP}}"
+							],
+							"path": [
+								"api",
+								"security",
+								"logout"
+							]
+						}
+					},
+					"response": []
 				}
 			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization-Token",
-						"value": "{{token}}"
-					}
-				],
-				"url": {
-					"raw": "{{IP}}/api/security/logout",
-					"host": [
-						"{{IP}}"
-					],
-					"path": [
-						"api",
-						"security",
-						"logout"
-					]
-				}
-			},
-			"response": []
+			"protocolProfileBehavior": {}
 		}
 	],
 	"event": [
@@ -351,7 +924,7 @@
 	],
 	"variable": [
 		{
-			"id": "696c9db7-4db2-403b-a969-99cc6da591c5",
+			"id": "15645bfd-c186-4245-bf9c-ee5230968cd6",
 			"key": "RandomNumber",
 			"value": "",
 			"type": "string"
