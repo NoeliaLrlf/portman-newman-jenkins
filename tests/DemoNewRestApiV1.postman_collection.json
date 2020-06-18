@@ -68,7 +68,7 @@
 					"name": "JV",
 					"item": [
 						{
-							"name": "Get Documents",
+							"name": "Get Documents Journal Voucher",
 							"event": [
 								{
 									"listen": "test",
@@ -358,7 +358,7 @@
 							"response": []
 						},
 						{
-							"name": "Get Documents",
+							"name": "Get Documents Budget",
 							"event": [
 								{
 									"listen": "test",
@@ -598,7 +598,7 @@
 					"name": "Receipts",
 					"item": [
 						{
-							"name": "Get Documents Copy",
+							"name": "Get Documents Receipts",
 							"event": [
 								{
 									"listen": "test",
@@ -924,7 +924,7 @@
 	],
 	"variable": [
 		{
-			"id": "15645bfd-c186-4245-bf9c-ee5230968cd6",
+			"id": "156e1f78-2776-4ec0-9374-56e4e0778341",
 			"key": "RandomNumber",
 			"value": "",
 			"type": "string"
