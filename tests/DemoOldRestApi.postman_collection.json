@@ -2,66 +2,79 @@
 	"info": {
 		"_postman_id": "7d3078c1-c5c6-4ce8-abc3-a1735086a5c7",
 		"name": "DemoOldRestApi",
+		"description": "collecrion",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Login API OnPremise",
-			"event": [
+			"name": "GEt Docu",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"id": "ea16246c-1f50-4624-b294-8d5eb0726806",
-						"exec": [
-							"postman.setGlobalVariable(\"RESPONSE\", data);\r",
-							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"token\", data.token);\r",
-							""
+					"name": "Login API OnPremise",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d87739c7-8abf-453a-b83b-95f2de36eed3",
+								"exec": [
+									"postman.setGlobalVariable(\"RESPONSE\", data);\r",
+									"var data = JSON.parse(responseBody);\r",
+									"postman.setGlobalVariable(\"token\", data.token);\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"Login oldddddddddddd\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
 						],
-						"type": "text/javascript"
-					}
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\" : \"admin\",\r\n    \"password\" : \"api\",\r\n    \"org\" : \"NTO\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{IP}}/api/security/login",
+							"host": [
+								"{{IP}}"
+							],
+							"path": [
+								"api",
+								"security",
+								"login"
+							]
+						},
+						"description": "desss"
+					},
+					"response": []
 				}
 			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"login\" : \"admin\",\r\n    \"password\" : \"api\",\r\n    \"org\" : \"NTO\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{IP}}/api/security/login",
-					"host": [
-						"{{IP}}"
-					],
-					"path": [
-						"api",
-						"security",
-						"login"
-					]
-				}
-			},
-			"response": []
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Get Documents",
+			"name": "Getold  Documents",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"id": "bc4cf5bc-4374-41cb-a726-51e3b4966d19",
 						"exec": [
-							"pm.test(\"Get Documents old\", function () {\r",
+							"pm.test(\"Get Documents oldddddddddddddddddd\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
@@ -118,7 +131,7 @@
 					"script": {
 						"id": "45499822-072c-4e22-b28b-bf68da38b791",
 						"exec": [
-							"pm.test(\"log out old\", function () {\r",
+							"pm.test(\"log out olddddddddddd\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
