@@ -69,14 +69,14 @@
 					"name": "JV",
 					"item": [
 						{
-							"name": "Get Documents Journal Voucher",
+							"name": "Get Documents Journal Voucherrrrrr",
 							"event": [
 								{
 									"listen": "test",
 									"script": {
 										"id": "04569205-c900-4787-9fec-a8e380248d90",
 										"exec": [
-											"pm.test(\"Get Documents\", function () {\r",
+											"pm.test(\"Get Documents JV\", function () {\r",
 											"    pm.response.to.have.status(201);\r",
 											"});\r",
 											""
@@ -122,7 +122,8 @@
 										"AR0208008",
 										"documents"
 									]
-								}
+								},
+								"description": "nosefsfsfsf"
 							},
 							"response": []
 						},
@@ -132,9 +133,9 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "b6b6cfdc-513f-46e3-91b1-2830ba4759d7",
+										"id": "29a13239-e884-4a3a-be37-689834245c52",
 										"exec": [
-											"pm.test(\"Create Session\", function () {\r",
+											"pm.test(\"Create Session JV\", function () {\r",
 											"    pm.response.to.have.status(201);\r",
 											"});\r",
 											"\r",
@@ -146,7 +147,7 @@
 								{
 									"listen": "prerequest",
 									"script": {
-										"id": "f61bb5df-d609-4db6-9626-8429184558e0",
+										"id": "adaf8b03-50a5-4892-8971-02680bdc9b80",
 										"exec": [
 											"const sessionID = pm.environment.set(\"sessionID\", _.random(100000, 999999));\r",
 											"pm.globals.set(\"sessionID\", sessionID);"
@@ -359,7 +360,7 @@
 							"response": []
 						},
 						{
-							"name": "Get Documents Budget",
+							"name": "Get Documents Budgettttttt",
 							"event": [
 								{
 									"listen": "test",
@@ -599,14 +600,14 @@
 					"name": "Receipts",
 					"item": [
 						{
-							"name": "Get Documents Receipts",
+							"name": "Get Documents Receiptsssssssss",
 							"event": [
 								{
 									"listen": "test",
 									"script": {
 										"id": "51e9651c-2bf4-413a-b840-c979a92a7f54",
 										"exec": [
-											"pm.test(\"Get Documents Receipts\", function () {\r",
+											"pm.test(\"Get Doc Receipts\", function () {\r",
 											"    pm.response.to.have.status(201);\r",
 											"});\r",
 											""
@@ -653,7 +654,7 @@
 										"documents"
 									]
 								},
-								"description": "this is description "
+								"description": "this is description dsd"
 							},
 							"response": []
 						},
@@ -949,7 +950,7 @@
 	],
 	"variable": [
 		{
-			"id": "a4e7b2c4-7583-48db-a0ca-d44b712396d0",
+			"id": "4610e430-c477-4784-87f5-5203386873c7",
 			"key": "RandomNumber",
 			"value": "",
 			"type": "string"
