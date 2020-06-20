@@ -46,9 +46,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{IP}}/api/security/login",
+							"raw": "{{URI_BASE}}/api/security/login",
 							"host": [
-								"{{IP}}"
+								"{{URI_BASE}}"
 							],
 							"path": [
 								"api",
@@ -74,11 +74,12 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "04569205-c900-4787-9fec-a8e380248d90",
+										"id": "d2341710-2510-4e5f-95ff-fbb20fde1e18",
 										"exec": [
-											"pm.test(\"Get Documents JV\", function () {\r",
+											"pm.test(\"TC 17972 Verify Get Journal Voucher returns status 200\", function () {\r",
 											"    pm.response.to.have.status(201);\r",
 											"});\r",
+											"\r",
 											""
 										],
 										"type": "text/javascript"
@@ -110,9 +111,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{IP}}/api/te/arinvoices/sessions/AR0208008/documents",
+									"raw": "{{URI_BASE}}/api/te/arinvoices/sessions/AR0208008/documents",
 									"host": [
-										"{{IP}}"
+										"{{URI_BASE}}"
 									],
 									"path": [
 										"api",
@@ -128,6 +129,60 @@
 							"response": []
 						},
 						{
+							"name": "Get Session",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "487f4364-6589-4ba7-84b6-1fd6c41f349a",
+										"exec": [
+											"pm.test(\"TC 123 Verify Get Session returns status 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization-Token",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n              \"Operation\": \"Create\",\r\n              \"Constructor\": {\r\n  \t\"strParentID\":\"TestVendor2\"\r\n  },\r\n              \"ModelFields\": {\r\n    \"fields\": [\r\n        {\r\n            \"AC_ADDRESS_ID\": \"H1\"\r\n        },\r\n        {\r\n            \"AC_DESCRIPTION\": \"H1 Address New\"\r\n        },\r\n        {\r\n            \"AC_TYPE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ADDRESS\": \"\"\r\n        },\r\n        {\r\n            \"AC_CITY\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ZIP\": \"\"\r\n        },\r\n        {\r\n            \"AC_COUNTRY\": \"\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDADDRESS\": \",\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDTEMPLATE\": \"<ADDRESS>\\r\\n<CITY>, <STPROV> <POSTCODE>\\r\\n<COUNTRY>\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FIRST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_MIDDLE_INITIAL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_LAST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_POSITION\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_PHONE\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_EMAIL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FAX\": \"\"\r\n        },\r\n        {\r\n            \"AC_MEM_NOTES\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATUS\": \"A\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_TITLE\": \"\"\r\n        },\r\n        {\r\n            \"AC_PARN_ID\": \"TestVendor2\"\r\n        },\r\n        {\r\n            \"AC_SAME_AS\": \"0\"\r\n        },\r\n        {\r\n            \"AC_PREFERRED\": \"No\"\r\n        },\r\n        {\r\n            \"AC_IN_USE\": false\r\n        }\r\n    ]\r\n}\r\n            }",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{URI_BASE}}/api/te/arinvoices/sessions/AR0208008",
+									"host": [
+										"{{URI_BASE}}"
+									],
+									"path": [
+										"api",
+										"te",
+										"arinvoices",
+										"sessions",
+										"AR0208008"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Create Session",
 							"event": [
 								{
@@ -135,7 +190,7 @@
 									"script": {
 										"id": "29a13239-e884-4a3a-be37-689834245c52",
 										"exec": [
-											"pm.test(\"Create Session JV\", function () {\r",
+											"pm.test(\"TC 123 Verify Create Journal Voucher returns status 201\", function () {\r",
 											"    pm.response.to.have.status(201);\r",
 											"});\r",
 											"\r",
@@ -178,9 +233,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{IP}}/api/v1/transactions/journalvouchers/sessions/",
+									"raw": "{{URI_BASE}}/api/v1/transactions/journalvouchers/sessions/",
 									"host": [
-										"{{IP}}"
+										"{{URI_BASE}}"
 									],
 									"path": [
 										"api",
@@ -195,68 +250,14 @@
 							"response": []
 						},
 						{
-							"name": "Get Session",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "487f4364-6589-4ba7-84b6-1fd6c41f349a",
-										"exec": [
-											"pm.test(\"Get Session\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization-Token",
-										"value": "{{token}}"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n              \"Operation\": \"Create\",\r\n              \"Constructor\": {\r\n  \t\"strParentID\":\"TestVendor2\"\r\n  },\r\n              \"ModelFields\": {\r\n    \"fields\": [\r\n        {\r\n            \"AC_ADDRESS_ID\": \"H1\"\r\n        },\r\n        {\r\n            \"AC_DESCRIPTION\": \"H1 Address New\"\r\n        },\r\n        {\r\n            \"AC_TYPE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ADDRESS\": \"\"\r\n        },\r\n        {\r\n            \"AC_CITY\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ZIP\": \"\"\r\n        },\r\n        {\r\n            \"AC_COUNTRY\": \"\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDADDRESS\": \",\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDTEMPLATE\": \"<ADDRESS>\\r\\n<CITY>, <STPROV> <POSTCODE>\\r\\n<COUNTRY>\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FIRST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_MIDDLE_INITIAL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_LAST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_POSITION\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_PHONE\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_EMAIL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FAX\": \"\"\r\n        },\r\n        {\r\n            \"AC_MEM_NOTES\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATUS\": \"A\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_TITLE\": \"\"\r\n        },\r\n        {\r\n            \"AC_PARN_ID\": \"TestVendor2\"\r\n        },\r\n        {\r\n            \"AC_SAME_AS\": \"0\"\r\n        },\r\n        {\r\n            \"AC_PREFERRED\": \"No\"\r\n        },\r\n        {\r\n            \"AC_IN_USE\": false\r\n        }\r\n    ]\r\n}\r\n            }",
-									"options": {
-										"raw": {}
-									}
-								},
-								"url": {
-									"raw": "{{IP}}/api/te/arinvoices/sessions/AR0208008",
-									"host": [
-										"{{IP}}"
-									],
-									"path": [
-										"api",
-										"te",
-										"arinvoices",
-										"sessions",
-										"AR0208008"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Delete Session",
 							"event": [
 								{
 									"listen": "test",
 									"script": {
-										"id": "87ea8c09-dab9-416f-8372-0cfdcfe86ffe",
+										"id": "f425b29a-81f4-41c5-b736-51ec41f99976",
 										"exec": [
-											"pm.test(\"Delete Session\", function () {\r",
+											"pm.test(\"TC 567 Verify Delete Session JV returns 200\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
 											"});"
 										],
@@ -286,9 +287,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{IP}}/api/v1/transactions/journalvouchers/sessions/{{sessionID}}",
+									"raw": "{{URI_BASE}}/api/v1/transactions/journalvouchers/sessions/{{sessionID}}",
 									"host": [
-										"{{IP}}"
+										"{{URI_BASE}}"
 									],
 									"path": [
 										"api",
@@ -310,56 +311,6 @@
 					"name": "Budget",
 					"item": [
 						{
-							"name": "Login API OnPremise",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "2878080a-385a-4b97-9209-321ff84a0fa9",
-										"exec": [
-											"postman.setGlobalVariable(\"RESPONSE\", data);\r",
-											"var data = JSON.parse(responseBody);\r",
-											"postman.setGlobalVariable(\"token\", data.token);\r",
-											"pm.test(\"Login API OnPremise\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"login\" : \"admin\",\r\n    \"password\" : \"api\",\r\n    \"org\" : \"NTO\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{IP}}/api/security/login",
-									"host": [
-										"{{IP}}"
-									],
-									"path": [
-										"api",
-										"security",
-										"login"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Get Documents Budgettttttt",
 							"event": [
 								{
@@ -367,7 +318,7 @@
 									"script": {
 										"id": "87659724-bfdb-4ee7-a6af-84947f1ce0c3",
 										"exec": [
-											"pm.test(\"Get Documents\", function () {\r",
+											"pm.test(\"TC 5689 Verify Get Documents retuns 201\", function () {\r",
 											"    pm.response.to.have.status(201);\r",
 											"});\r",
 											""
@@ -401,9 +352,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{IP}}/api/te/arinvoices/sessions/AR0208008/documents",
+									"raw": "{{URI_BASE}}/api/te/arinvoices/sessions/AR0208008/documents",
 									"host": [
-										"{{IP}}"
+										"{{URI_BASE}}"
 									],
 									"path": [
 										"api",
@@ -412,6 +363,60 @@
 										"sessions",
 										"AR0208008",
 										"documents"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Session",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b5bbb283-451c-4047-8a74-5d2908f44654",
+										"exec": [
+											"pm.test(\"Get Session Budget\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization-Token",
+										"value": "{{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n              \"Operation\": \"Create\",\r\n              \"Constructor\": {\r\n  \t\"strParentID\":\"TestVendor2\"\r\n  },\r\n              \"ModelFields\": {\r\n    \"fields\": [\r\n        {\r\n            \"AC_ADDRESS_ID\": \"H1\"\r\n        },\r\n        {\r\n            \"AC_DESCRIPTION\": \"H1 Address New\"\r\n        },\r\n        {\r\n            \"AC_TYPE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ADDRESS\": \"\"\r\n        },\r\n        {\r\n            \"AC_CITY\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ZIP\": \"\"\r\n        },\r\n        {\r\n            \"AC_COUNTRY\": \"\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDADDRESS\": \",\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDTEMPLATE\": \"<ADDRESS>\\r\\n<CITY>, <STPROV> <POSTCODE>\\r\\n<COUNTRY>\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FIRST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_MIDDLE_INITIAL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_LAST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_POSITION\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_PHONE\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_EMAIL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FAX\": \"\"\r\n        },\r\n        {\r\n            \"AC_MEM_NOTES\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATUS\": \"A\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_TITLE\": \"\"\r\n        },\r\n        {\r\n            \"AC_PARN_ID\": \"TestVendor2\"\r\n        },\r\n        {\r\n            \"AC_SAME_AS\": \"0\"\r\n        },\r\n        {\r\n            \"AC_PREFERRED\": \"No\"\r\n        },\r\n        {\r\n            \"AC_IN_USE\": false\r\n        }\r\n    ]\r\n}\r\n            }",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{URI_BASE}}/api/te/arinvoices/sessions/AR0208008",
+									"host": [
+										"{{URI_BASE}}"
+									],
+									"path": [
+										"api",
+										"te",
+										"arinvoices",
+										"sessions",
+										"AR0208008"
 									]
 								}
 							},
@@ -468,9 +473,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{IP}}/api/v1/transactions/journalvouchers/sessions/",
+									"raw": "{{URI_BASE}}/api/v1/transactions/journalvouchers/sessions/",
 									"host": [
-										"{{IP}}"
+										"{{URI_BASE}}"
 									],
 									"path": [
 										"api",
@@ -479,60 +484,6 @@
 										"journalvouchers",
 										"sessions",
 										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get Session",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "b5bbb283-451c-4047-8a74-5d2908f44654",
-										"exec": [
-											"pm.test(\"Get Session Budget\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization-Token",
-										"value": "{{token}}"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n              \"Operation\": \"Create\",\r\n              \"Constructor\": {\r\n  \t\"strParentID\":\"TestVendor2\"\r\n  },\r\n              \"ModelFields\": {\r\n    \"fields\": [\r\n        {\r\n            \"AC_ADDRESS_ID\": \"H1\"\r\n        },\r\n        {\r\n            \"AC_DESCRIPTION\": \"H1 Address New\"\r\n        },\r\n        {\r\n            \"AC_TYPE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ADDRESS\": \"\"\r\n        },\r\n        {\r\n            \"AC_CITY\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATE\": \"\"\r\n        },\r\n        {\r\n            \"AC_ZIP\": \"\"\r\n        },\r\n        {\r\n            \"AC_COUNTRY\": \"\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDADDRESS\": \",\"\r\n        },\r\n        {\r\n            \"AC_PRINTEDTEMPLATE\": \"<ADDRESS>\\r\\n<CITY>, <STPROV> <POSTCODE>\\r\\n<COUNTRY>\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FIRST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_MIDDLE_INITIAL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_LAST_NAME\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_POSITION\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_PHONE\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_EMAIL\": \"\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_FAX\": \"\"\r\n        },\r\n        {\r\n            \"AC_MEM_NOTES\": \"\"\r\n        },\r\n        {\r\n            \"AC_STATUS\": \"A\"\r\n        },\r\n        {\r\n            \"AC_CONTACT_TITLE\": \"\"\r\n        },\r\n        {\r\n            \"AC_PARN_ID\": \"TestVendor2\"\r\n        },\r\n        {\r\n            \"AC_SAME_AS\": \"0\"\r\n        },\r\n        {\r\n            \"AC_PREFERRED\": \"No\"\r\n        },\r\n        {\r\n            \"AC_IN_USE\": false\r\n        }\r\n    ]\r\n}\r\n            }",
-									"options": {
-										"raw": {}
-									}
-								},
-								"url": {
-									"raw": "{{IP}}/api/te/arinvoices/sessions/AR0208008",
-									"host": [
-										"{{IP}}"
-									],
-									"path": [
-										"api",
-										"te",
-										"arinvoices",
-										"sessions",
-										"AR0208008"
 									]
 								}
 							},
@@ -576,9 +527,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{IP}}/api/v1/transactions/journalvouchers/sessions/{{sessionID}}",
+									"raw": "{{URI_BASE}}/api/v1/transactions/journalvouchers/sessions/{{sessionID}}",
 									"host": [
-										"{{IP}}"
+										"{{URI_BASE}}"
 									],
 									"path": [
 										"api",
@@ -641,9 +592,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{IP}}/api/te/arinvoices/sessions/AR0208008/documents",
+									"raw": "{{URI_BASE}}/api/te/arinvoices/sessions/AR0208008/documents",
 									"host": [
-										"{{IP}}"
+										"{{URI_BASE}}"
 									],
 									"path": [
 										"api",
@@ -664,9 +615,9 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "af28f574-1457-41a9-9a07-b3100d53880c",
+										"id": "878632f5-6790-4269-a339-3335a4e809d2",
 										"exec": [
-											"pm.test(\"Get Session\", function () {\r",
+											"pm.test(\"Get Session Receipts\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
 											"});"
 										],
@@ -697,9 +648,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{IP}}/api/te/arinvoices/sessions/AR0208008",
+									"raw": "{{URI_BASE}}/api/te/arinvoices/sessions/AR0208008",
 									"host": [
-										"{{IP}}"
+										"{{URI_BASE}}"
 									],
 									"path": [
 										"api",
@@ -787,9 +738,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{IP}}/api/te/arinvoices/sessions/AR0208008",
+									"raw": "{{URI_BASE}}/api/te/arinvoices/sessions/AR0208008",
 									"host": [
-										"{{IP}}"
+										"{{URI_BASE}}"
 									],
 									"path": [
 										"api",
@@ -859,9 +810,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{IP}}/api/te/arinvoices/sessions/AR0208008",
+									"raw": "{{URI_BASE}}/api/te/arinvoices/sessions/AR0208008",
 									"host": [
-										"{{IP}}"
+										"{{URI_BASE}}"
 									],
 									"path": [
 										"api",
@@ -909,9 +860,9 @@
 							}
 						],
 						"url": {
-							"raw": "{{IP}}/api/security/logout",
+							"raw": "{{URI_BASE}}/api/security/logout",
 							"host": [
-								"{{IP}}"
+								"{{URI_BASE}}"
 							],
 							"path": [
 								"api",
@@ -950,7 +901,7 @@
 	],
 	"variable": [
 		{
-			"id": "691eec2c-9150-4121-9bb6-0a395f168090",
+			"id": "19017c4d-e509-4f64-acce-ccf4d5b5c844",
 			"key": "RandomNumber",
 			"value": "",
 			"type": "string"
