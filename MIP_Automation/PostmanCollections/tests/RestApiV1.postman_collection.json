@@ -1,0 +1,339 @@
+{
+	"info": {
+		"_postman_id": "134500da-2fc6-423b-a867-fe972c5c9619",
+		"name": "RestApiV1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login ",
+			"item": [
+				{
+					"name": "Login hosted Step 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cd6fbf00-4692-4e1d-8d53-5abf4674e688",
+								"exec": [
+									"var data = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"TOKEN\", data.accessToken);\r",
+									"\r",
+									"pm.test(\"Login Gateway \", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"{{UserLogin}}\",\n  \"password\": \"{{PasswordLogin}}\"\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{URI_GATEWAY}}/api/v1/tokens/login",
+							"host": [
+								"{{URI_GATEWAY}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tokens",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login hosted Step 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c656064a-b788-45ca-a92a-06fe8454772c",
+								"exec": [
+									"pm.test(\"Login api\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"login\": \"{{UserLogin}}\",\n  \"password\": \"{{PasswordLogin}}\",\n  \"token\": \"{{TOKEN}}\"\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{URI_PUBLIC_API}}/api/security/autologin/webui",
+							"host": [
+								"{{URI_PUBLIC_API}}"
+							],
+							"path": [
+								"api",
+								"security",
+								"autologin",
+								"webui"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Organization",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "de134eb7-2173-42e5-9b40-bd06fffe733d",
+								"exec": [
+									"pm.test(\"Current org\", function () {\r",
+									" \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization-Token",
+								"value": "{{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \n  \"name\": \"{{NTO}}\"\n    \n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{URI_PUBLIC_API}}/api/security/login/organization",
+							"host": [
+								"{{URI_PUBLIC_API}}"
+							],
+							"path": [
+								"api",
+								"security",
+								"login",
+								"organization"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Transactions",
+			"item": [
+				{
+					"name": "JV",
+					"item": [
+						{
+							"name": "CreateSession-jv-201a",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "36b7c082-5c91-4550-bcd4-23621dcc7057",
+										"exec": [
+											"pm.test(\"Create Session\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "28b9b1ca-628b-4639-a1ad-9fa1ce76adff",
+										"exec": [
+											"const sessionID = pm.environment.set(\"SessionID\", _.random(100000, 999999));\r",
+											"pm.globals.set(\"SessionID\", sessionID);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization-Token",
+										"value": "{{TOKEN}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n        \"sessionId\": \"{{SessionID}}\",\n        \"status\": \"BP\",\n        \"description\": \"Description1\",\n        \"date\": \"2019-06-20\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{URI_PUBLIC_API}}/api/v1/transactions/journalvouchers/sessions/",
+									"host": [
+										"{{URI_PUBLIC_API}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"transactions",
+										"journalvouchers",
+										"sessions",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Session",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "53286418-41c7-4cb9-ab82-a449fbc854fa",
+										"exec": [
+											"pm.test(\"Delete Session\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization-Token",
+										"value": "{{TOKEN}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URI_PUBLIC_API}}/api/v1/transactions/journalvouchers/sessions/{{SessionID}}",
+									"host": [
+										"{{URI_PUBLIC_API}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"transactions",
+										"journalvouchers",
+										"sessions",
+										"{{SessionID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Logout",
+			"item": [
+				{
+					"name": "Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a6c2ec55-b79a-4f75-808d-f01cb21ae16d",
+								"exec": [
+									"pm.test(\"Logout\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization-Token",
+								"value": "{{TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{URI_PUBLIC_API}}/api/security/logout",
+							"host": [
+								"{{URI_PUBLIC_API}}"
+							],
+							"path": [
+								"api",
+								"security",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
